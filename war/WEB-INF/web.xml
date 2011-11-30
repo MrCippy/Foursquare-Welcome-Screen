@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>GetHereNow</servlet-name>
+		<servlet-class>com.zacksheppard.foursquare.GetHereNow</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PushHandler</servlet-name>
+		<servlet-class>com.zacksheppard.foursquare.PushHandler</servlet-class>
+	</servlet>
+	<servlet>
+    <servlet-name>ChannelHandler</servlet-name>
+    <servlet-class>com.zacksheppard.foursquare.ChannelHandler</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>IndexServlet</servlet-name>
+    <servlet-class>com.zacksheppard.foursquare.IndexServlet</servlet-class>
+  </servlet>
+	<servlet-mapping>
+		<servlet-name>GetHereNow</servlet-name>
+		<url-pattern>/herenow</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PushHandler</servlet-name>
+		<url-pattern>/handlepush</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChannelHandler</servlet-name>
+    <url-pattern>/_ah/channel/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>IndexServlet</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+</web-app>
