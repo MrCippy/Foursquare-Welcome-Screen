@@ -1,4 +1,4 @@
-package com.zacksheppard.foursquare;
+package com.foursquare.examples.push;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foursquare.examples.push.models.LinkedUser;
+import com.foursquare.examples.push.util.Common;
 import com.google.appengine.api.users.User;
 
 import fi.foyt.foursquare.api.FoursquareApi;
+import fi.foyt.foursquare.api.FoursquareApiException;
 
 /**
  * A servlet to dynamically create the HTML for the homepage.
@@ -27,20 +30,32 @@ public class IndexServlet extends HttpServlet {
       else {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-        FoursquareApi api = Common.getCurrentApi(pm);
-        String targetVenue = req.getParameter("vid");
-        if (targetVenue == null || Common.getVenueName(targetVenue) == null) {
-          targetVenue = "4ab7e57cf964a5205f7b20e3";
-        }
+        
+        FoursquareApi api = null;
+        
+        if (req.getPathInfo().contains("user")) {
+          String code = req.getParameter("code");
+          if (code != null) {
+            api = Common.getApi();
+            try {
+              api.authenticateCode(code);
+              if (api.getOAuthToken() != null) {
+                LinkedUser u = LinkedUser.loadOrCreate(pm, Common.getGoogleUser().getUserId());
+                u.foursquareAuth = api.getOAuthToken();
+                u.save(pm);
+              } else api = null;
+            } catch (FoursquareApiException e) { api = null; }
+          }
+        } else api = Common.getCurrentApi(pm);
         
         if (api == null || api.getOAuthToken() == null || api.getOAuthToken().length() <= 0) {
           writeHead(out, "Connect to foursquare");
           writeConnectPrompt(out);
           writeFoot(out, null, null);
         } else {
-          writeHead(out, "Welcome to "+Common.getVenueName(targetVenue));
-          writePage(out, Common.getVenueName(targetVenue));
-          writeFoot(out, targetVenue, Common.createChannelToken(targetVenue));
+          writeHead(out, "Welcome to "+Common.TARGET_VENUE_NAME);
+          writePage(out, Common.TARGET_VENUE_NAME);
+          writeFoot(out, Common.TARGET_VENUE, Common.createChannelToken(Common.TARGET_VENUE));
         }
       }
     } finally {

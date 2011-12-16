@@ -45,6 +45,7 @@ body {
 
 #herenow .person img {
   padding-bottom: 5px;
+  width: 110px;
 }
 
 #lastCheckin {

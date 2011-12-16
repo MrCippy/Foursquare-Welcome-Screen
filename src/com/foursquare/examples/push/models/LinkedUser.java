@@ -1,4 +1,4 @@
-package com.zacksheppard.foursquare.models;
+package com.foursquare.examples.push.models;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
@@ -29,11 +29,11 @@ public class LinkedUser {
 		pm.makePersistent(this);
 	}
 	
-	public static LinkedUser load(PersistenceManager pm, String googid) {
+	public static LinkedUser loadOrCreate(PersistenceManager pm, String googid) {
     try {
       return pm.getObjectById(LinkedUser.class, googid);
     } catch (JDOObjectNotFoundException e) {
-      return null;
+      return new LinkedUser(googid, null);
     }
   }
 }

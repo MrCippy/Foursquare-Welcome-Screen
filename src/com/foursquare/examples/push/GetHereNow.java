@@ -1,4 +1,4 @@
-package com.zacksheppard.foursquare;
+package com.foursquare.examples.push;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -7,6 +7,8 @@ import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.foursquare.examples.push.util.Common;
 
 import fi.foyt.foursquare.api.FoursquareApi;
 import fi.foyt.foursquare.api.FoursquareApiException;

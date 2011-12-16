@@ -1,4 +1,4 @@
-package com.zacksheppard.foursquare;
+package com.foursquare.examples.push;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.zacksheppard.foursquare.models.ChannelRecord;
+import com.foursquare.examples.push.models.ChannelRecord;
+import com.foursquare.examples.push.util.Common;
 
 /**
  * The landing point for pushes from foursquare. Ensures that the push secret value is correct,

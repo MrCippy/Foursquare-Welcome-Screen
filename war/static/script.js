@@ -1,17 +1,17 @@
-// Default to foursquare hq
-
 $(function() {
-  loadHereNow();
+  loadHereNow(true);
 });
 
 // Fetch the whole herenow for a venue and load it in (1 time every 2 minutes)
-var loadHereNow = function() {
+var loadHereNow = function(firstTime) {
   // If the channel is closed, request the server to send us a new one
   var tackOn = '';
   if (!connected) { tackOn = '&channel=request'; }
   $.getJSON('/herenow?vid='+vid+tackOn, function(data) {
     // Handle opening the channel on our end if we just got a new one
     if (!(typeof(data.token) === 'undefined')) { refreshChannel(data.token); }
+    
+    if (firstTime) { updatePush(data.checkins[0]); }
 
     // Load all the contents in at once to avoid a cascade flicker
     var newContents = $('<div></div>');

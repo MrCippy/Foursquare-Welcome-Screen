@@ -1,4 +1,4 @@
-package com.zacksheppard.foursquare;
+package com.foursquare.examples.push.util;
 
 import java.util.Date;
 import java.util.List;
@@ -7,20 +7,22 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
+import com.foursquare.examples.push.models.LinkedUser;
 import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.zacksheppard.foursquare.models.LinkedUser;
 
 import fi.foyt.foursquare.api.FoursquareApi;
 
 public class Common {
   private final static String CLIENT_ID = "YOUR CLIENT ID";
   private final static String CLIENT_SECRET = "YOUR CLIENT SECRET";
-  public final static String PUSH_SECRET = "YOUR PUSH SECRET";
-  private final static String CALLBACK = "YOUR CALLBACK URL";
+  private final static String CALLBACK = "YOUR CLIENT CALLBACK";
+  public final static String PUSH_SECRET = "YOUR CLIENT PUSH SECRET";
+  public final static String TARGET_VENUE = "THE FOURSQUARE ID OF THE VENUE YOU MANAGE";
+  public final static String TARGET_VENUE_NAME = "THE NAME OF THE VENUE YOU MANAGE";
   
   public static FoursquareApi getApi() { return getApi(null); }
   public static FoursquareApi getApi(String token) {
@@ -31,23 +33,13 @@ public class Common {
   public static FoursquareApi getCurrentApi(PersistenceManager pm) {
     User googler = getGoogleUser();
     if (googler != null) {
-      LinkedUser luser = LinkedUser.load(pm, googler.getUserId());
-      if (luser != null) {
+      LinkedUser luser = LinkedUser.loadOrCreate(pm, googler.getUserId());
+      if (luser.foursquareAuth() != null) {
         return getApi(luser.foursquareAuth());
       }
     }
     
     return null;
-  }
-  
-  public static String getVenueName(String vid) {
-    if (vid.equals("4ab7e57cf964a5205f7b20e3")) {
-      return "foursquare hq";
-    } else if (vid.equals("4d232f2f9822a090189effaf")) {
-      return "Grind Spaces";
-    } else {
-      return null;
-    }
   }
   
   // Convert the core aspects of a checkin to json

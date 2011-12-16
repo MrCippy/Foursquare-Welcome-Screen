@@ -1,4 +1,4 @@
-package com.zacksheppard.foursquare;
+package com.foursquare.examples.push;
 
 import java.io.IOException;
 
@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foursquare.examples.push.models.ChannelRecord;
+import com.foursquare.examples.push.util.Common;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
-import com.zacksheppard.foursquare.models.ChannelRecord;
 
 @SuppressWarnings("serial")
 public class ChannelHandler extends HttpServlet {
