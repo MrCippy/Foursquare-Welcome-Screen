@@ -5,7 +5,11 @@ This is the code for a foursquare-powered welcome screen for any venue. It is wr
 Google App Engine. Feel free to use it as an example of how to interact with the foursquare push API,
 or just use it because it's a pretty rad welcome screen (we have it set up at the foursquare office).
 
+---
+
 To get it set up for your own venue:
+------------------------------------
+
 1.  Fork or download this code.
 2.  Get a Google App Engine account and make a new application.
 3.  Get a foursquare account and make a new oauth consumer (at [foursquare.com/oauth](http://foursquare.com/oauth, "Foursquare"))
