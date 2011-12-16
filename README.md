@@ -5,7 +5,7 @@ This is the code for a foursquare-powered welcome screen for any venue. It is wr
 Google App Engine. Feel free to use it as an example of how to interact with the foursquare push API,
 or just use it because it's a pretty rad welcome screen (we have it set up at the foursquare office).
 
-![This project running](https://github.com/zackzachariah/Foursquare-Welcome-Screen/blob/master/screenshot.jpg "In use at the foursquare office")
+![This project running](https://github.com/zackzachariah/Foursquare-Welcome-Screen/raw/master/screenshot.jpg "In use at the foursquare office")
 
 
 To get it set up for your own venue:
