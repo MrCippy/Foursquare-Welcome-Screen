@@ -15,6 +15,6 @@ To get it set up for your own venue:
 4.  Update the appengine-web.xml file with your new application id.
 5.  Update the com.foursquare.example.push.util.Common file with your new foursquare consumer's information. While there, also update this file with the venue you want to track.
 
-    **Note:** You can only track venues that you are the foursquare manager of, or that is a home venue you created.
+    (**Note:** You can only track a foursquare venue if you manage it, or it is your home and you created it.)
 
 6.  Upload the code to your App Engine account, and it should work out of the box!
